@@ -1,1 +1,35 @@
 #list of funtions - add,del,update (Aayush) , Search(Vidit)
+from mysql.connector import *
+try:
+
+    def db_empower():
+
+        con1=connect(host='localhost',user='root',passwd='Rdbms123@#',database='empower')
+        cur1=con1.cursor()
+        cur1.execute('''create table if not exists empmaster(
+empid int primary key,
+empname varchar(50),
+gender char(1),
+aadhar_no int,
+edept varchar(40),
+esal numeric(7,2),
+contact int);''')
+        con1.close()
+
+    db_empower()
+    
+except Exception as e:
+    print(e)
+
+def addrec_empmaster():
+    a=input('enter employee ID >>')
+    b=input('enter employee name >>')
+    c=input('enter gender(M/F/O) >>')
+    d=input('enter Aadhar ID no >>')
+    e=input('enter department >>')
+    f=input('enter current salary >>')
+    g=input('enter contact number >>')
+
+    cur1.execute("insert into empmaster values({},'{}','{}',{},'{}',{},{})".format(a,b,c,d,e,f,g))
+
+    con1.commit()
