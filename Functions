@@ -1,11 +1,13 @@
 #list of funtions - add,del,update (Aayush) , Search(Vidit)
+
 from mysql.connector import *
+con1=connect(host='localhost',user='root',passwd='Rdbms123@#',database='empower')
+cur1=con1.cursor()
+cur1.execute('set autocommit = off;')
 try:
 
     def db_empower():
 
-        con1=connect(host='localhost',user='root',passwd='Rdbms123@#',database='empower')
-        cur1=con1.cursor()
         #create empmaster table
         cur1.execute('''create table if not exists empmaster(
 empid int primary key,
@@ -15,16 +17,18 @@ doj date,
 aadhar_no int,
 edeptid int,
 edesgn varchar(40),
-esal numeric(7,2),
-contact int);''')
+esal numeric(10,2),
+contact numeric(10));''')
+        con1.commit()
         #create sal_structure table
         cur1.execute('''create table if not exists sal_structure(
 empid int,
 basic_sal numeric(7,2),
 allowances numeric(7,2),
-provident_fund numeric(7,2)
+provident_fund numeric(7,2),
 tds numeric(7,2),
 foreign key(empid) references empmaster(empid));''')
+        con1.commit()
         #create dept table
         cur1.execute('''create table if not exists dept(
 deptid int primary key,
@@ -32,6 +36,7 @@ dept_name varchar(40),
 dept_head int,
 dept_location varchar(40),
 foreign key(dept_head) references empmaster(empid));''')
+        
         #add foreign key constraint to empmaster for edeptid
         cur1.execute('''alter table empmaster
 add constraint foreign key(edeptid) references dept(deptid);''')
@@ -47,19 +52,21 @@ def addrec_empmaster():
     a=input('enter employee ID >>')
     b=input('enter employee name >>')
     c=input('enter gender(M/F/O) >>')
+    doj=input('enter date of joining in YYYY-MM-DD format >>')
     d=input('enter Aadhar ID no >>')
-    e=input('enter department id>>')
-    f=input('enter current salary >>')
-    g=input('enter contact number >>')
+    e=input('enter department id >>')
+    f=input('enter designation >>')
+    g=input('enter current salary >>')
+    h=input('enter contact number >>')
 
-    cur1.execute("insert into empmaster values({},'{}','{}',{},'{}',{},{})".format(a,b,c,d,e,f,g))
+    cur1.execute("insert into empmaster values({},'{}','{}','{}',{},{},'{}',{},{})".format(a,b,c,doj,d,e,f,g,h))
 
     con1.commit()
 
 def delrec_empmaster():
-    a=input('enter employee id of record to be deleted>>')
+    a=input('enter employee id of record to be deleted >>')
     cur1.execute(f'delete from empmaster where empid={a};')
-    b=input('Do you wish to make the changes permanent(Y/N)?>>')
+    b=input('Do you wish to make the changes permanent(Y/N)? >>')
     if b in 'Yy':
         con1.commit()
     elif b in 'Nn':
