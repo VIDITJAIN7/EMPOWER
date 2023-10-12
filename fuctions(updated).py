@@ -1,4 +1,4 @@
-from mysql.connector import *
+from pymysql import *
 
 try:
     con1 = connect(host='localhost', user='root', password='viditjain', database='empower')
@@ -35,31 +35,30 @@ try:
             CREATE TABLE IF NOT EXISTS dept (
                 deptid INT PRIMARY KEY,
                 dept_name VARCHAR(40),
-                dept_head INT,
-                FOREIGN KEY (dept_head) REFERENCES empmaster(empid)
+                dept_head INT
             );
         ''')
-        # Add foreign key constraint to empmaster for edeptid
+        # Add foreign key constraint to empmaster for deptid
         cur1.execute('''
             ALTER TABLE empmaster
-            ADD CONSTRAINT FOREIGN KEY (edeptid) REFERENCES dept(deptid);
+            ADD CONSTRAINT FOREIGN KEY (deptid) REFERENCES dept(deptid);
         ''')
         # Add departments to the dept table
         department_data = [
-            (0, 'admin',0001 ),
-            (1, 'HR',0002),
-            (2, 'sales',0003),
-            (3, 'IT',0004),
-            (4, 'unassigned',None)
+            (0, 'admin', 1),
+            (1, 'HR', 2),
+            (2, 'sales', 3),
+            (3, 'IT', 4),
+            (4, 'unassigned', None)
         ]
 
         cur1.executemany('INSERT INTO dept (deptid, dept_name, dept_head) VALUES (%s, %s, %s)', department_data)
-        
+
         con1.commit()
 
     db_empower()
 
-except Error as e:
+except MySQLError as e:
     print(e)
 
 def addrec_empmaster():
@@ -73,12 +72,12 @@ def addrec_empmaster():
     h = input('enter current salary >>')
     i = input('enter contact no. >>')
 
-    cur1.execute("INSERT INTO empmaster VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)", (a, b, c, d, e, f, g, h, i))
+    cur1.execute("INSERT INTO empmaster (empid, name, gender, doj, aadhar, deptid, desgn, salary, contact) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)", (a, b, c, d, e, f, g, h, i))
 
     con1.commit()
 
 def delrec_empmaster():
-    a = input('enter employee id of record to be deleted >>')
+    a = input('enter employee id of the record to be deleted >>')
     cur1.execute('DELETE FROM empmaster WHERE empid = %s', (a,))
     b = input('Do you wish to make the changes permanent (Y/N)? >>')
     if b in 'Yy':
