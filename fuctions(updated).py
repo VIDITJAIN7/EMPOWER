@@ -36,7 +36,6 @@ try:
                 deptid INT PRIMARY KEY,
                 dept_name VARCHAR(40),
                 dept_head INT,
-                dept_location VARCHAR(40),
                 FOREIGN KEY (dept_head) REFERENCES empmaster(empid)
             );
         ''')
@@ -45,6 +44,16 @@ try:
             ALTER TABLE empmaster
             ADD CONSTRAINT FOREIGN KEY (edeptid) REFERENCES dept(deptid);
         ''')
+        # Add departments to the dept table
+        department_data = [
+            (0, 'admin',0001 ),
+            (1, 'HR',0002),
+            (2, 'sales',0003),
+            (3, 'IT',0004),
+            (4, 'unassigned',None)
+        ]
+
+        cur1.executemany('INSERT INTO dept (deptid, dept_name, dept_head) VALUES (%s, %s, %s)', department_data)
         
         con1.commit()
 
