@@ -1,7 +1,7 @@
 from pymysql import *
 
 try:
-    con1 = connect(host='localhost', user='root', password='viditjain', database='empower')
+    con1 = connect(host='localhost', user='root', password='viditjain', database='empower')#enter your password 
     cur1 = con1.cursor()
 
     def db_empower():
