@@ -96,3 +96,18 @@ def search_emp():
             print(row)
     else:
         print("No results found.")
+
+def updaterec_emp():
+    a = input("Enter employee ID of the employee to update data: ")
+    while True:
+        b = input("Enter what data should be updated (empid, name, gender, doj, aadhar, deptid, desgn, salary, or contact) >>")
+        c = input("Enter the updated value >> ")
+        d = int(input("To continue, press 1 >>"))
+        update = f'UPDATE empmaster SET {b} = %s WHERE empid = %s'
+        cur1.execute(update, (c, a))
+        if d != 1:
+            break
+    if input("Press 'y' to save changes >> ") in 'yY':
+        con1.commit()
+    else:
+        con1.rollback()
