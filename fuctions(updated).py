@@ -86,8 +86,8 @@ def delrec_empmaster():
         cur1.execute('ROLLBACK;')
 
 def search_emp():
-    a = input('enter field to filter by (empid, name, gender, doj, aadhar, deptid, desgn, salary, or contact): ')
-    b = input('enter term to search: ')
+    a = input('enter field to filter by (empid, name, gender, doj, aadhar, deptid, desgn, salary, or contact)>> ')
+    b = input('enter term to search>> ')
     search = 'SELECT * FROM empmaster WHERE {} = %s'.format(a)
     cur1.execute(search, (b,))
     r = cur1.fetchall()
