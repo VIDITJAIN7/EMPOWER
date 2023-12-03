@@ -16,11 +16,11 @@ try:
                 name VARCHAR(50),
                 gender CHAR(1),
                 doj DATE,
-                aadhar INT,
+                aadhar INT(12),
                 deptid INT,
                 desgn VARCHAR(40),
                 salary NUMERIC(7, 2),
-                contact INT
+                contact INT(10)
             );
         ''')
         # Create sal_structure table
