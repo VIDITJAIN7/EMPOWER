@@ -56,7 +56,7 @@ try:
             (4, 'unassigned', None)
         ]
 
-        cur1.executemany('INSERT INTO dept (deptid, dept_name, dept_head) VALUES (%s, %s, %s)', department_data)
+        cur1.executemany('INSERT IGNORE INTO dept (deptid, dept_name, dept_head) VALUES (%s, %s, %s)', department_data)
 
         con1.commit()
 
