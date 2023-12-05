@@ -244,11 +244,11 @@ def emp_delete():
     button_delete.grid(row=1, column=0, columnspan=2, padx=5, pady=5, sticky=tk.W)
 
     button_save = ttk.Button(root, text="Save Changes", command=save_changes, style="TButton")
-    button_save.grid(row=2, column=0, padx=5, pady=5, sticky=tk.W)
+    button_save.grid(row=1, column=1, padx=5, pady=5, sticky=tk.W)
 
     button_discard = ttk.Button(root, text="Discard Changes", command=discard_changes, style="TButton")
-    button_discard.grid(row=2, column=1, padx=5, pady=5, sticky=tk.W)
-
+    button_discard.grid(row=1, column=2, padx=5, pady=5, sticky=tk.W)
+    
     root.mainloop()
 
 def emp_update():
@@ -289,13 +289,13 @@ def emp_update():
     entry_value.grid(row=2, column=1, padx=5, pady=5)
 
     button_update = ttk.Button(root, text="Update Record", command=updaterec_emp, style="TButton")
-    button_update.grid(row=3, column=0, columnspan=2, pady=10)
+    button_update.grid(row=3, column=0, columnspan=2, pady=10,sticky=tk.W)
 
     button_save_changes = ttk.Button(root, text="Save Changes", command=save_changes, style="TButton")
-    button_save_changes.grid(row=4, column=0, pady=10)
+    button_save_changes.grid(row=3, column=1, pady=10)
 
     button_discard_changes = ttk.Button(root, text="Discard Changes", command=discard_changes, style="TButton")
-    button_discard_changes.grid(row=4, column=1, pady=10)
+    button_discard_changes.grid(row=3, column=2, pady=10)
 
     root.mainloop()
 
@@ -376,7 +376,7 @@ def emp_report():
     style = ttk.Style()
     style.configure("TButton", foreground="#2e2e2e", background="#2e2e2e")
 
-    label_search = ttk.Label(root, text="Enter term to search:", foreground="white", background="#2e2e2e")
+    label_search = ttk.Label(root, text="Enter empid to search:", foreground="white", background="#2e2e2e")
     label_search.grid(row=0, column=0, padx=5, pady=5, sticky=tk.W)
 
     entry_search = ttk.Entry(root)
@@ -391,7 +391,7 @@ def emp_report():
     for col in columns:
         tree.heading(col, text=col)
 
-    tree.grid(row=1, column=0, columnspan=3, pady=10, sticky="nsew")
+    tree.grid(row=1, column=0, columnspan=2, pady=10, sticky="nsew")
     root.grid_rowconfigure(1, weight=1)
     root.grid_columnconfigure(0, weight=1)
 
@@ -409,9 +409,12 @@ def on_radio_button_selected():
 main_window = Tk()
 main_window.title('Employee Management System')
 main_window.geometry("400x200")
+I=PhotoImage(file=r'C:\Users\user\Videos\Captures\Untitled 1 - OpenOffice Draw 12_3_2023 7_26_42 PM.png')
 main_window.resizable(False, False)
 main_window.configure(bg='#2e2e2e')
 
+l=Label(image=I)
+l.pack()
 label_prompt = Label(main_window, text="Choose your login option", fg='white', bg='#2e2e2e')
 label_prompt.pack(pady=10)
 
