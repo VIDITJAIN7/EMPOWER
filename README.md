@@ -6,4 +6,5 @@ there's an issue in update:<br>
     cur1.execute(update_query, (updated_value, employee_id))<br>
 i think a condition would need to be added so that for numeric datatype columns you simply type in set <> = <>, but for the rest quotes would have been used.
 but there might be some other error also since it is not working for even aadhar at my end.
-also while adding records, gender being set is M even if F is selected. or even O.
+also while adding records, gender being set is M even if F is selected. or even O.<br>
+I am not sure what gender_var.set("M") is doing, tried removing it but then selecting female gives no value in gender, blank column for that record... 
