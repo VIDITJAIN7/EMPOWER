@@ -106,7 +106,6 @@ def emp_add():
                 (empid, name, gender, doj, aadhar, deptid, desgn, salary, contact))
             con1.commit()
             messagebox.showinfo("Success", "Employee added successfully!")
-            root.destroy()
         except Exception as e:
             messagebox.showerror("Error", f"Error occurred: {str(e)}")
             con1.rollback()
@@ -144,16 +143,9 @@ def emp_add():
     label_gender.grid(row=2, column=0, padx=5, pady=5, sticky=tk.W)
 
     gender_var = tk.StringVar()
-    gender_var.set("M")
 
-    radio_male = ttk.Radiobutton(root, text="Male", variable=gender_var, value="M", style="TRadiobutton")
-    radio_male.grid(row=2, column=1, padx=5, pady=5, sticky=tk.W)
-
-    radio_female = ttk.Radiobutton(root, text="Female", variable=gender_var, value="F", style="TRadiobutton")
-    radio_female.grid(row=2, column=2, padx=5, pady=5, sticky=tk.W)
-
-    radio_other = ttk.Radiobutton(root, text="Other", variable=gender_var, value="O", style="TRadiobutton")
-    radio_other.grid(row=2, column=3, padx=5, pady=5, sticky=tk.W)
+    combo_gender = ttk.Combobox(root, values=["Male", "Female", "Other"], textvariable=gender_var)
+    combo_gender.grid(row=2, column=1, padx=5, pady=5, sticky=tk.W)
 
     label_doj = ttk.Label(root, text="Date of Joining (YYYY-MM-DD):", foreground="white", background="#2e2e2e")
     label_doj.grid(row=3, column=0, padx=5, pady=5, sticky=tk.W)
@@ -409,14 +401,9 @@ def on_radio_button_selected():
 main_window = Tk()
 main_window.title('Employee Management System')
 main_window.geometry("400x200")
-I=PhotoImage(file=r'C:\Users\user\Videos\Captures\Untitled 1 - OpenOffice Draw 12_3_2023 7_26_42 PM.png')
 main_window.resizable(False, False)
 main_window.configure(bg='#2e2e2e')
 
-l=Label(image=I)
-l.pack()
-label_prompt = Label(main_window, text="Choose your login option", fg='white', bg='#2e2e2e')
-label_prompt.pack(pady=10)
 
 radio_var = IntVar()
 
@@ -427,4 +414,3 @@ employee_radio = Radiobutton(main_window, text='Employee', variable=radio_var, v
 employee_radio.pack(side='right', padx=10, pady=10)
 
 main_window.mainloop()
-
