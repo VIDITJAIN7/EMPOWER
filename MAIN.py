@@ -19,7 +19,7 @@ try:
                 aadhar NUMERIC(12,0),
                 deptid INT,
                 desgn VARCHAR(40),
-                salary NUMERIC(7, 2),
+                salary NUMERIC(10, 2),
                 contact NUMERIC(10,0)
             );
         ''')
@@ -91,7 +91,7 @@ def emp_add():
     def addrec_empmaster():
         empid = entry_empid.get()
         name = entry_name.get()
-        gender = gender_var.get()
+        gender = entry_gender.get()
         doj = entry_doj.get()
         aadhar = entry_aadhar.get()
         selected_dept_name = combo_dept.get()
@@ -122,6 +122,7 @@ def emp_add():
         con1.rollback()
         messagebox.showinfo("Info", "Changes discarded.")
         root.destroy()
+
     # GUI Setup
     root = tk.Tk()
     root.title("Add Employee")
@@ -139,13 +140,11 @@ def emp_add():
     entry_name = ttk.Entry(root)
     entry_name.grid(row=1, column=1, padx=5, pady=5, sticky=tk.W)
 
-    label_gender = ttk.Label(root, text="Gender:", foreground="white", background="#2e2e2e")
+    label_gender = ttk.Label(root, text="Gender:(M/F/O)", foreground="white", background="#2e2e2e")
     label_gender.grid(row=2, column=0, padx=5, pady=5, sticky=tk.W)
 
-    gender_var = tk.StringVar()
-
-    combo_gender = ttk.Combobox(root, values=["Male", "Female", "Other"], textvariable=gender_var)
-    combo_gender.grid(row=2, column=1, padx=5, pady=5, sticky=tk.W)
+    entry_gender = ttk.Entry(root)
+    entry_gender.grid(row=2, column=1, padx=5, pady=5, sticky=tk.W)
 
     label_doj = ttk.Label(root, text="Date of Joining (YYYY-MM-DD):", foreground="white", background="#2e2e2e")
     label_doj.grid(row=3, column=0, padx=5, pady=5, sticky=tk.W)
@@ -163,8 +162,7 @@ def emp_add():
     label_dept.grid(row=5, column=0, padx=5, pady=5, sticky=tk.W)
 
     departments = {"Admin": 0, "HR": 1, "Sales": 2, "IT": 3, "Unassigned": 4}
-    dept_var = tk.StringVar()
-    dept_var.set("Admin")
+    dept_var = tk.StringVar(value="Admin")
 
     combo_dept = ttk.Combobox(root, values=list(departments.keys()), textvariable=dept_var)
     combo_dept.grid(row=5, column=1, padx=5, pady=5, sticky=tk.W)
@@ -401,9 +399,14 @@ def on_radio_button_selected():
 main_window = Tk()
 main_window.title('Employee Management System')
 main_window.geometry("400x200")
+I=PhotoImage(file=r'C:\Users\user\Videos\Captures\Untitled 1 - OpenOffice Draw 12_3_2023 7_26_42 PM.png')
 main_window.resizable(False, False)
 main_window.configure(bg='#2e2e2e')
 
+l=Label(image=I)
+l.pack()
+label_prompt = Label(main_window, text="Choose your login option", fg='white', bg='#2e2e2e')
+label_prompt.pack(pady=10)
 
 radio_var = IntVar()
 
